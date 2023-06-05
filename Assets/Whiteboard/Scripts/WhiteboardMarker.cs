@@ -2,21 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System;
 
 public class WhiteboardMarker : MonoBehaviour
 {
     [SerializeField] private Transform _tip;
     [SerializeField] private int _penSize = 5;
+    [SerializeField] private float _pointsTreshold = 5f;
+    [SerializeField] private Transform _pointsParent;
+    [SerializeField] private ParticleSystem _particlesSuccess;
+
+
 
     private Renderer _renderer;
     private Color[] _colors;
     private float _tipHeight;
+    private List<Transform> _sequencePoints = new List<Transform>();
+    private int _currentPointIndex = 0;
 
     private RaycastHit _touch;
     private Whiteboard _whiteboard;
     private Vector2 _touchPos, _lastTouchPos;
     private bool _touchedLastFrame;
     private Quaternion _lastTouchRot;
+    private Color[] _penColors = new Color[]
+    {
+        Color.red,
+        Color.blue,
+        Color.green,
+        Color.yellow
+    };
 
     void Start()
     {
@@ -24,10 +39,16 @@ public class WhiteboardMarker : MonoBehaviour
         _colors = Enumerable.Repeat(_renderer.material.color, _penSize * _penSize).ToArray();
         _tipHeight = _tip.localScale.y;
 
+        if (_pointsParent != null)
+        {
+            _sequencePoints = new List<Transform>(_pointsParent.GetComponentsInChildren<Transform>());
+            _sequencePoints.Remove(_pointsParent);
+        }
     }
 
     void Update()
     {
+        CheckPointCollision();
         Draw();
     }
 
@@ -40,6 +61,9 @@ public class WhiteboardMarker : MonoBehaviour
                 if (_whiteboard == null)
                 {
                     _whiteboard = _touch.transform.GetComponent<Whiteboard>();
+                    //untested abaixo
+                    _renderer.material.color = GetNextPenColor();
+                    _colors = Enumerable.Repeat(_renderer.material.color, _penSize * _penSize).ToArray();
                 }
 
                 _touchPos = new Vector2(_touch.textureCoord.x, _touch.textureCoord.y);
@@ -57,7 +81,7 @@ public class WhiteboardMarker : MonoBehaviour
                 {
                     _whiteboard.texture.SetPixels(x, y, _penSize, _penSize, _colors);
 
-                    for (float f = 0.01f; f < 1.00f; f += 0.01f)
+                    for (float f = 0.01f; f < 1.00f; f += 0.1f)
                     {
                         var lerpX = (int)Mathf.Lerp(_lastTouchPos.x, x, f);
                         var lerpY = (int)Mathf.Lerp(_lastTouchPos.y, y, f);
@@ -79,5 +103,45 @@ public class WhiteboardMarker : MonoBehaviour
 
         _whiteboard = null;
         _touchedLastFrame = false;
+    }
+
+    
+
+private void CheckPointCollision()
+{
+    if (_currentPointIndex >= _sequencePoints.Count)
+    {
+        // Todos os pontos da sequência foram atravessados
+        Debug.Log("Sequencia completada em ordem!");
+        _currentPointIndex = 0;
+        _particlesSuccess.Play();
+        return;
+    }
+
+    Transform currentPoint = _sequencePoints[_currentPointIndex];
+
+    if (currentPoint.GetComponent<Renderer>().material.HasProperty("_Color") && currentPoint.GetComponent<Renderer>().material.color != _renderer.material.color)
+    {
+        float distance = Vector3.Distance(_tip.position, currentPoint.position);
+        if (distance <= _pointsTreshold / 10)
+        {
+            // A ponta da caneta colidiu com o ponto atual da sequência
+            currentPoint.GetComponent<Renderer>().material.color = _renderer.material.color;
+            // Faça aqui o que for necessário quando a ponta da caneta colidir com o ponto
+            ParticleSystem particleSystem = currentPoint.GetComponentInChildren<ParticleSystem>();
+            particleSystem.Play();
+            Debug.Log("Ponto atravessado!");
+
+            _currentPointIndex++; // Avança para o próximo ponto na sequência
+        }
+    }
+}
+
+    private Color GetNextPenColor()
+    {
+        Color currentColor = _renderer.material.color;
+        int colorIndex = Array.IndexOf(_penColors, currentColor);
+        int nextColorIndex = (colorIndex + 1) % _penColors.Length;
+        return _penColors[nextColorIndex];
     }
 }
