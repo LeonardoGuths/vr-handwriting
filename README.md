@@ -2,7 +2,7 @@
   <img alt="Children using VR HMD" src="https://i.imgur.com/2IZ4IQt.png" />
 </p>
 
-# 3D Learning and Handwriting Training Application
+# A virtual reality application as a pedagogical resource for children's handwriting learning and training
 
 This repository contains a 3D application developed in [Unity](https://unity.com/) with the goal of assisting in the learning and training of children's handwriting. The application provides an interactive and engaging environment where children can practice writing letters, numbers, and words in a fun and intuitive way.
 
