@@ -20,6 +20,7 @@ public class WhiteboardMarker : MonoBehaviour
     private List<Transform> _sequencePoints = new List<Transform>();
     private int _currentPointIndex = 0;
 
+
     private RaycastHit _touch;
     private Whiteboard _whiteboard;
     private Vector2 _touchPos, _lastTouchPos;
@@ -33,6 +34,7 @@ public class WhiteboardMarker : MonoBehaviour
         Color.yellow
     };
 
+
     void Start()
     {
         _renderer = _tip.GetComponent<Renderer>();
@@ -44,6 +46,7 @@ public class WhiteboardMarker : MonoBehaviour
             _sequencePoints = new List<Transform>(_pointsParent.GetComponentsInChildren<Transform>());
             _sequencePoints.Remove(_pointsParent);
         }
+
     }
 
     void Update()
@@ -54,8 +57,11 @@ public class WhiteboardMarker : MonoBehaviour
 
     private void Draw()
     {
+
         if (Physics.Raycast(_tip.position, transform.up, out _touch, _tipHeight))
         {
+            
+
             if (_touch.transform.CompareTag("Whiteboard"))
             {
                 if (_whiteboard == null)
@@ -71,7 +77,7 @@ public class WhiteboardMarker : MonoBehaviour
                 var x = (int)(_touchPos.x * _whiteboard.textureSize.x - (_penSize/2));
                 var y = (int)(_touchPos.y * _whiteboard.textureSize.y - (_penSize/2));
 
-
+              
                 if (y < 0 || y > _whiteboard.textureSize.y || x < 0 || x > _whiteboard.textureSize.x)
                 {
                     return;
