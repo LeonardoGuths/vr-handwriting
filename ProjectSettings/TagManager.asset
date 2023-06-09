@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Whiteboard
   - Points
+  - SamplesInfoPanel
   layers:
   - Default
   - TransparentFX
@@ -13,9 +14,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Left Hand Physics
+  - Right Hand Physics
+  - Non Physics Hand Layer
   - 
   - 
   - 

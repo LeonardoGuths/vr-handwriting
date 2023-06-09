@@ -11,7 +11,12 @@ public class WhiteboardMarker : MonoBehaviour
     [SerializeField] private float _pointsTreshold = 5f;
     [SerializeField] private Transform _pointsParent;
     [SerializeField] private ParticleSystem _particlesSuccess;
+    [SerializeField] private float _moveDuration = 1f; // Duração da transição em segundos
+    [SerializeField] private GameObject _whiteboardObject;
 
+    private Vector3 _initialPosition; // Posição inicial do quadro
+    private Vector3 _targetPosition; // Posição final do quadro
+    private float _moveTimer = 10f; // Cronômetro para controlar o tempo da transição
 
 
     private Renderer _renderer;
@@ -47,12 +52,26 @@ public class WhiteboardMarker : MonoBehaviour
             _sequencePoints.Remove(_pointsParent);
         }
 
+        _initialPosition = _whiteboardObject.transform.position;
+        Debug.Log("posicao inicial no start: " + _initialPosition);
     }
+
+    
 
     void Update()
     {
         CheckPointCollision();
         Draw();
+
+        // Verificar se está em transição
+        if (_moveTimer < _moveDuration)
+        {
+            _moveTimer += Time.deltaTime;
+
+            // Calcular a interpolação linear entre a posição inicial e final
+            float t = Mathf.Clamp01(_moveTimer / _moveDuration);
+            _whiteboardObject.transform.position = Vector3.Lerp(_initialPosition, _targetPosition, t);
+        }
     }
 
     private void Draw()
@@ -121,12 +140,17 @@ private void CheckPointCollision()
         Debug.Log("Sequencia completada em ordem!");
         _currentPointIndex = 0;
         _particlesSuccess.Play();
+
+        // Mover o quadro para a esquerda suavemente
+        _targetPosition = _whiteboardObject.transform.position + Vector3.left * 0.15f; // "deslocamento" é o valor da distância que você deseja mover o quadro
+        _initialPosition = _whiteboardObject.transform.position;
+        _moveTimer = 0f;
         return;
     }
 
     Transform currentPoint = _sequencePoints[_currentPointIndex];
 
-    if (currentPoint.GetComponent<Renderer>().material.HasProperty("_Color") && currentPoint.GetComponent<Renderer>().material.color != _renderer.material.color)
+    if (currentPoint.GetComponent<Renderer>().material.HasProperty("_Color"))
     {
         float distance = Vector3.Distance(_tip.position, currentPoint.position);
         if (distance <= _pointsTreshold / 10)
