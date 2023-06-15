@@ -71,5 +71,8 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
-# Oculus Integration Package
-/[Aa]ssets/[Oo]culus
+# Oculus Integration Package Unnecessary Tools
+/[Aa]ssets/[Oo]culus/[Ll]ipSync
+/[Aa]ssets/[Oo]culus/[Vv]oice
+/[Aa]ssets/[Oo]culus/[Aa]udioManager
+/[Aa]ssets/[Oo]culus/[Ss]patializer
