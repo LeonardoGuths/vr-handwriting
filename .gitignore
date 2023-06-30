@@ -76,3 +76,7 @@ crashlytics-build.properties
 /[Aa]ssets/[Oo]culus/[Vv]oice
 /[Aa]ssets/[Oo]culus/[Aa]udioManager
 /[Aa]ssets/[Oo]culus/[Ss]patializer
+
+# Assets to Ignore
+/[Aa]ssets/[Jj]apaneseSchool
+/[Aa]ssets/[Jj]apaneseSchool.meta
