@@ -103,13 +103,17 @@ namespace Oculus.Interaction
         {
             _isBeingTransformed = true;
             CachePhysicsState();
-            _rigidbody.isKinematic = true;
+
+            _rigidbody.collisionDetectionMode = CollisionDetectionMode.Discrete;
+    
         }
+
 
         private void ReenablePhysics()
         {
             _isBeingTransformed = false;
-            // update the mass based on the scale change
+
+            // Update the mass based on the scale change
             if (_scaleMassWithSize)
             {
                 float initialScaledVolume = _initialScale.x * _initialScale.y * _initialScale.z;
@@ -121,9 +125,11 @@ namespace Oculus.Interaction
                 _rigidbody.mass *= changeInMassFactor;
             }
 
-            // revert the original kinematic state
-            _rigidbody.isKinematic = _savedIsKinematicState;
+            // Revert the original kinematic state
+            _rigidbody.collisionDetectionMode = CollisionDetectionMode.Discrete;
+            _rigidbody.constraints = RigidbodyConstraints.None;
         }
+
 
         public void ApplyVelocities(Vector3 linearVelocity, Vector3 angularVelocity)
         {
@@ -136,12 +142,15 @@ namespace Oculus.Interaction
         {
             if (_hasPendingForce)
             {
+                Debug.Log("has pending force");
                 _hasPendingForce = false;
-                _rigidbody.AddForce(_linearVelocity, ForceMode.VelocityChange);
-                _rigidbody.AddTorque(_angularVelocity, ForceMode.VelocityChange);
+                _rigidbody.velocity = _linearVelocity;
+                _rigidbody.angularVelocity = _angularVelocity;
                 WhenVelocitiesApplied(_linearVelocity, _angularVelocity);
             }
         }
+
+
 
         private void CachePhysicsState()
         {
