@@ -57,17 +57,19 @@ public class WhiteboardMarker : MonoBehaviour
     {
         CheckPointCollision();
 
-        var maxY = Mathf.Max(_tip.transform.position.y, _whiteboardObject.transform.position.y); // Obter a altura máxima permitida
-            // Verificar se a altura atual é menor que a altura máxima permitida
-            if (_tip.transform.position.y < maxY)
-            {
-                // Definir a posição da caneta na altura máxima permitida
-                var newPosition = transform.position;
-                // Debug.Log("newposy 1: " + newPosition.y);
-                newPosition.y = (float)maxY + 0.1025f;
-                // Debug.Log("newposy 2: " + newPosition.y);
-                transform.position = newPosition;
-            }
+        // função abaixo reseta posição da caneta sempre que passar da altura máxima permitida, voltando pra região permitida \/ (desabilitado)
+        
+        //var maxY = Mathf.Max(_tip.transform.position.y, _whiteboardObject.transform.position.y); // Obter a altura máxima permitida
+        //Verificar se a altura atual é menor que a altura máxima permitida
+        //    if (_tip.transform.position.y < maxY)
+        //{
+        //    Definir a posição da caneta na altura máxima permitida
+        //   var newPosition = transform.position;
+        //    Debug.Log("newposy 1: " + newPosition.y);
+        //    newPosition.y = (float)maxY + 0.1025f;
+        //    Debug.Log("newposy 2: " + newPosition.y);
+        //    transform.position = newPosition;
+        //}
 
         Draw();
 
