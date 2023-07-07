@@ -12,13 +12,20 @@ public class MoveOVRCameraRig : MonoBehaviour
 
     private bool waitForSecondsFinished = false; // Verifica se o tempo de espera de 3 segundos foi concluído
 
+    public Light directionalLight; // Referência à Directional Light
+    public float duracaoTransicao = 3f; // Duração da transição em segundos
+    public float intensidadeInicial = 0.75f; // Intensidade inicial da emissão
+    public float intensidadeFinal = 0.5f; // Intensidade final da emissão
+
     void Start()
     {
         // Define o movimento sequencial
         movementSequence = new Vector3[]
         {
-            new Vector3(transform.position.x + 1f, transform.position.y, transform.position.z),
-            new Vector3(transform.position.x + 1f, transform.position.y, transform.position.z - 3f)
+            new Vector3(transform.position.x, transform.position.y + 0.44f, transform.position.z),
+            new Vector3(transform.position.x + 1f, transform.position.y + 0.44f , transform.position.z),
+            new Vector3(transform.position.x + 1f, transform.position.y + 0.44f, transform.position.z - 4f),
+            new Vector3(transform.position.x, transform.position.y + 0.44f, transform.position.z - 4f)
         };
 
         StartCoroutine(WaitAndStartMovement(3f));
@@ -54,6 +61,28 @@ public class MoveOVRCameraRig : MonoBehaviour
         }
     }
 
+    private IEnumerator DiminuirIntensidadeEmissaoCoroutine()
+    {
+        float tempoDecorrido = 0f;
+
+        while (tempoDecorrido < duracaoTransicao)
+        {
+            // Calcula a intensidade atual usando a interpolação linear
+            float intensidadeAtual = Mathf.Lerp(intensidadeInicial, intensidadeFinal, tempoDecorrido / duracaoTransicao);
+
+            // Define a nova intensidade para a emissão
+            directionalLight.intensity = intensidadeAtual;
+
+            // Incrementa o tempo decorrido
+            tempoDecorrido += Time.deltaTime;
+
+            yield return null;
+        }
+
+        // Certifica-se de definir a intensidade final após o tempo de transição ter decorrido completamente
+        directionalLight.intensity = intensidadeFinal;
+    }
+
     IEnumerator WaitAndStartMovement(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
@@ -65,5 +94,6 @@ public class MoveOVRCameraRig : MonoBehaviour
         // Inicia o movimento
         isMoving = true;
         currentMovementIndex = 0;
+        StartCoroutine(DiminuirIntensidadeEmissaoCoroutine());
     }
 }

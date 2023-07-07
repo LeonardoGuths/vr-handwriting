@@ -51,6 +51,8 @@ public class WhiteboardMarker : MonoBehaviour
 
         _initialPosition = _whiteboardObject.transform.position;
         Debug.Log("posicao inicial no start: " + _initialPosition);
+
+        _sequencePoints[0].GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
     }
 
     private void Update()
@@ -86,90 +88,117 @@ public class WhiteboardMarker : MonoBehaviour
     }
 
     private void Draw()
-{
-    if (Physics.Raycast(_tip.position, transform.up, out _touch, _tipHeight))
     {
-        if (_touch.transform.CompareTag("Whiteboard"))
+        if (Physics.Raycast(_tip.position, transform.up, out _touch, _tipHeight))
         {
-            if (_whiteboard == null)
+            if (_touch.transform.CompareTag("Whiteboard"))
             {
-                _whiteboard = _touch.transform.GetComponent<Whiteboard>();
-                _renderer.material.color = GetNextPenColor();
-                _colors = Enumerable.Repeat(_renderer.material.color, _penSize * _penSize).ToArray();
-            }
-
-            _touchPos = new Vector2(_touch.textureCoord.x, _touch.textureCoord.y);
-
-            var x = (int)(_touchPos.x * _whiteboard.textureSize.x - (_penSize / 2));
-            var y = (int)(_touchPos.y * _whiteboard.textureSize.y - (_penSize / 2));
-
-            // if (y < 0 || y > _whiteboard.textureSize.y || x < 0 || x > _whiteboard.textureSize.x)
-            // {
-            //     return;
-            // }
-
-            
-
-            if (_touchedLastFrame)
-            {
-                _whiteboard.texture.SetPixels(x, y, _penSize, _penSize, _colors);
-
-                for (float f = 0.01f; f < 1.00f; f += 0.1f)
+                if (_whiteboard == null)
                 {
-                    var lerpX = (int)Mathf.Lerp(_lastTouchPos.x, x, f);
-                    var lerpY = (int)Mathf.Lerp(_lastTouchPos.y, y, f);
-
-                    _whiteboard.texture.SetPixels(lerpX, lerpY, _penSize, _penSize, _colors);
+                    _whiteboard = _touch.transform.GetComponent<Whiteboard>();
+                    _renderer.material.color = GetNextPenColor();
+                    _colors = Enumerable.Repeat(_renderer.material.color, _penSize * _penSize).ToArray();
                 }
 
-                transform.rotation = _lastTouchRot;
+                _touchPos = new Vector2(_touch.textureCoord.x, _touch.textureCoord.y);
 
-                _whiteboard.texture.Apply();
+                var x = (int)(_touchPos.x * _whiteboard.textureSize.x - (_penSize / 2));
+                var y = (int)(_touchPos.y * _whiteboard.textureSize.y - (_penSize / 2));
+
+                // if (y < 0 || y > _whiteboard.textureSize.y || x < 0 || x > _whiteboard.textureSize.x)
+                // {
+                //     return;
+                // }
+
+                
+
+                if (_touchedLastFrame)
+                {
+                    _whiteboard.texture.SetPixels(x, y, _penSize, _penSize, _colors);
+
+                    for (float f = 0.01f; f < 1.00f; f += 0.1f)
+                    {
+                        var lerpX = (int)Mathf.Lerp(_lastTouchPos.x, x, f);
+                        var lerpY = (int)Mathf.Lerp(_lastTouchPos.y, y, f);
+
+                        _whiteboard.texture.SetPixels(lerpX, lerpY, _penSize, _penSize, _colors);
+                    }
+
+                    transform.rotation = _lastTouchRot;
+
+                    _whiteboard.texture.Apply();
+                }
+
+                _lastTouchPos = new Vector2(x, y);
+                _lastTouchRot = transform.rotation;
+                _touchedLastFrame = true;
+                return;
             }
-
-            _lastTouchPos = new Vector2(x, y);
-            _lastTouchRot = transform.rotation;
-            _touchedLastFrame = true;
-            return;
         }
+
+        _whiteboard = null;
+        _touchedLastFrame = false;
     }
 
-    _whiteboard = null;
-    _touchedLastFrame = false;
-}
 
+
+    IEnumerator ResetMoveTimerCoroutine()
+    {
+        yield return new WaitForSeconds(1f);
+        _moveTimer = 0f;
+    }
 
     private void CheckPointCollision()
     {
+        // Transform currentPoint = _sequencePoints[_currentPointIndex];
+        // Transform nextPoint = null;
         if (_currentPointIndex >= _sequencePoints.Count)
         {
+            _sequencePoints[_currentPointIndex-1].GetComponent<Renderer>().material.DisableKeyword("_EMISSION");
             // Todos os pontos da sequência foram atravessados
             Debug.Log("Sequencia completada em ordem!");
             _currentPointIndex = 0;
             _particlesSuccess.Play();
 
             // Mover o quadro para a esquerda suavemente
-            _targetPosition = _whiteboardObject.transform.position + Vector3.left * 0.15f; // "deslocamento" é o valor da distância que você deseja mover o quadro
+            _targetPosition = _whiteboardObject.transform.position + Vector3.up * 0.25f; // "deslocamento" é o valor da distância que você deseja mover o quadro
             _initialPosition = _whiteboardObject.transform.position;
-            _moveTimer = 0f;
+            StartCoroutine(ResetMoveTimerCoroutine());
             return;
         }
 
-        Transform currentPoint = _sequencePoints[_currentPointIndex];
+        // Transform currentPoint = _sequencePoints[_currentPointIndex];
+        // if (_currentPointIndex < (_sequencePoints.Count-1))
+        // {
+        //     nextPoint = _sequencePoints[_currentPointIndex+1];
+        //     Debug.Log("SETOU NEXTPOINT PRA: " + (_currentPointIndex+1) + " E O TOTAL É: " + _sequencePoints.Count);
+        // }
+            
 
-        if (currentPoint.GetComponent<Renderer>().material.HasProperty("_Color"))
+        if (_sequencePoints[_currentPointIndex].GetComponent<Renderer>().material.HasProperty("_Color"))
         {
-            float distance = Vector3.Distance(_tip.position, currentPoint.position);
+            float distance = Vector3.Distance(_tip.position, _sequencePoints[_currentPointIndex].position);
             if (distance <= _pointsTreshold / 10)
             {
                 // A ponta da caneta colidiu com o ponto atual da sequência
-                currentPoint.GetComponent<Renderer>().material.color = _renderer.material.color;
+                _sequencePoints[_currentPointIndex].GetComponent<Renderer>().material.color = _renderer.material.color;
                 // Faça aqui o que for necessário quando a ponta da caneta colidir com o ponto
-                ParticleSystem particleSystem = currentPoint.GetComponentInChildren<ParticleSystem>();
-                particleSystem.Play();
-                Debug.Log("Ponto atravessado!");
+                if (_sequencePoints[_currentPointIndex].GetComponent<Renderer>().material.HasProperty("_EmissionColor"))
+                {
+                    Color originalEmissionColor = _sequencePoints[_currentPointIndex].GetComponent<Renderer>().material.GetColor("_EmissionColor");
+                    // Color newEmissionColor = new Color(1f, 1f, 1f); // Cor de emissão desejada
+
+                    _sequencePoints[_currentPointIndex].GetComponent<Renderer>().material.DisableKeyword("_EMISSION");
+                    if (_currentPointIndex < (_sequencePoints.Count-1))
+                    {  
+                        _sequencePoints[_currentPointIndex+1].GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
+                    }
+                    // currentPoint.GetComponent<Renderer>().material.SetColor("_EmissionColor", newEmissionColor);
+                }
+                
 
                 _currentPointIndex++; // Avança para o próximo ponto na sequência
+                Debug.Log("Ponto atravessado, proximo: " + _currentPointIndex);
             }
         }
     }
