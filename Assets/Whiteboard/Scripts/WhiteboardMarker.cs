@@ -8,6 +8,7 @@ public class WhiteboardMarker : MonoBehaviour
 {
     [SerializeField] private Transform _tip;
     [SerializeField] private int _penSize = 5;
+    [SerializeField] private float _interpolationLevel = 0.1f;
     [SerializeField] private float _pointsTreshold = 5f;
     [SerializeField] private Transform _pointsParent;
     [SerializeField] private ParticleSystem _particlesSuccess;
@@ -140,7 +141,7 @@ public class WhiteboardMarker : MonoBehaviour
                 {
                     _whiteboard.texture.SetPixels(x, y, _penSize, _penSize, _colors);
 
-                    for (float f = 0.01f; f < 1.00f; f += 0.1f)
+                    for (float f = 0.01f; f < 1.00f; f += _interpolationLevel)
                     {
                         var lerpX = (int)Mathf.Lerp(_lastTouchPos.x, x, f);
                         var lerpY = (int)Mathf.Lerp(_lastTouchPos.y, y, f);

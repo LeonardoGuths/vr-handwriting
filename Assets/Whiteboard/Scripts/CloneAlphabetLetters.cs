@@ -9,12 +9,12 @@ public class CloneAlphabetLetters : MonoBehaviour
     public float spacingX = 1.5f;               // Espaçamento entre as letras no eixo X
     public float offsetBetweenLetters = 0.2f;   // Deslocamento entre as letras no eixo X
     public Transform parentTransform;           // Objeto pai onde os clones serão posicionados
-
+    public string palavra;                      // String alvo para clonar as letras
 
     void Start()
     {
         initialPosition = transform.position;
-        CloneWordToPositions("PROFESSOR RAFAEL TORCHELSEN");        // A palavra desejada deverá ser passada como parâmetro aqui.
+        CloneWordToPositions(palavra);        // A palavra desejada será passada como parâmetro aqui.
     }
 
     void CloneWordToPositions(string word)

@@ -196,7 +196,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tip: {fileID: 192679874}
-  _penSize: 25
+  _penSize: 10
+  _interpolationLevel: 0.1
   _pointsTreshold: 0.1
   _pointsParent: {fileID: 875736111}
   _particlesSuccess: {fileID: 1718047040}
@@ -470,7 +471,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &116504174
 Transform:
   m_ObjectHideFlags: 0
@@ -16958,7 +16959,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &497593434
 Transform:
   m_ObjectHideFlags: 0
@@ -16967,8 +16968,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 497593433}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -3.8460338, y: -4.219, z: 2.151}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalPosition: {x: -3.8460338, y: -4.744, z: 2.151}
+  m_LocalScale: {x: 0.7, y: 0.2, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1169043127}
@@ -17003,7 +17004,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   texture: {fileID: 0}
-  textureSize: {x: 2048, y: 6144}
+  textureSize: {x: 7168, y: 1024}
 --- !u!64 &497593437
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -19098,9 +19099,11 @@ MonoBehaviour:
   - {fileID: 6866536725613774818, guid: ece5b353fba485e45b9460be068fe1bd, type: 3}
   - {fileID: 4307673737721041558, guid: 2f047155bb7a7f64183031d3e853a1c3, type: 3}
   - {fileID: 7972201418864875929, guid: 77768fbd8f6d2cd41a275ff0fd5bd2d4, type: 3}
+  - {fileID: 2278808855423496151, guid: aa53759c4ffd00a42a92752d6872746a, type: 3}
   spacingX: 0.175
   offsetBetweenLetters: 0
   parentTransform: {fileID: 875736111}
+  palavra: PROFESSOR RAFAEL TORCHELSEN
 --- !u!114 &939706086
 MonoBehaviour:
   m_ObjectHideFlags: 0
