@@ -19049,7 +19049,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 875736110}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.453, y: -4.803, z: 2.1527}
+  m_LocalPosition: {x: -1.385, y: -4.803, z: 2.1527}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -19081,9 +19081,22 @@ MonoBehaviour:
   - {fileID: 3194271614106885243, guid: 3f4a5f0f996df544aba8b445b647477a, type: 3}
   - {fileID: 2346679966021604057, guid: 84883a3b0cd13d74b85c39c00c9a3231, type: 3}
   - {fileID: 7464139644706590067, guid: 52b2e9bb66e23024d8b097eb071408a2, type: 3}
-  - {fileID: 4307673737721041558, guid: 2f047155bb7a7f64183031d3e853a1c3, type: 3}
+  - {fileID: 8373022394733742753, guid: 9f7d1b822ac1dcc458674eb749e379ad, type: 3}
+  - {fileID: 1801721378631287034, guid: 7ee4006dea4168a4488f381f7465f4ab, type: 3}
+  - {fileID: 7242328780081615646, guid: f1a2683b6d6cf004bac625fb16366a80, type: 3}
   - {fileID: 5966951056377051820, guid: b5a0d2f2a0290284b84da06d76a82e2f, type: 3}
+  - {fileID: 8538584283539720552, guid: 9be4a3872aded254f9b86b1f5aa97df2, type: 3}
+  - {fileID: 9063664512174754746, guid: af2c1d9d679dac449ba6cb5d2a4cf87d, type: 3}
+  - {fileID: 2130472608758179548, guid: bcfd2d3f5fa6dbe4c8f8779451e196f5, type: 3}
+  - {fileID: 900234489164688582, guid: c8690ff9d4d319245b71e931cf8ca583, type: 3}
   - {fileID: 6983488894101262080, guid: d230f734f9bb62647baeeca097f40e8a, type: 3}
+  - {fileID: 7153203127985450779, guid: f469bb46514ba0a4a98b4383c772aa83, type: 3}
+  - {fileID: 8071537955259165608, guid: e91a955202108da459a0ad13fed2dda9, type: 3}
+  - {fileID: 2491916602066358311, guid: 5f7ee02b203a29648a4086c041ebd7e9, type: 3}
+  - {fileID: 8161865903484542315, guid: 45e7cd5966dc96140856035d46be459f, type: 3}
+  - {fileID: 1129081758535532472, guid: 066e8842d6e34fa42b832468a0ad31c5, type: 3}
+  - {fileID: 6866536725613774818, guid: ece5b353fba485e45b9460be068fe1bd, type: 3}
+  - {fileID: 4307673737721041558, guid: 2f047155bb7a7f64183031d3e853a1c3, type: 3}
   - {fileID: 7972201418864875929, guid: 77768fbd8f6d2cd41a275ff0fd5bd2d4, type: 3}
   spacingX: 0.175
   offsetBetweenLetters: 0
@@ -37000,7 +37013,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1548066319
 Transform:
   m_ObjectHideFlags: 0
@@ -64761,7 +64774,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2117144371
 Transform:
   m_ObjectHideFlags: 0

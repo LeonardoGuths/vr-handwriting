@@ -14,7 +14,7 @@ public class CloneAlphabetLetters : MonoBehaviour
     void Start()
     {
         initialPosition = transform.position;
-        CloneWordToPositions("JOÃO THIAGO");        // A palavra desejada deverá ser passada como parâmetro aqui.
+        CloneWordToPositions("PROFESSOR RAFAEL TORCHELSEN");        // A palavra desejada deverá ser passada como parâmetro aqui.
     }
 
     void CloneWordToPositions(string word)
