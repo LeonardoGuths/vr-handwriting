@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class CloneAlphabetLetters : MonoBehaviour
 {
-    public GameObject[] alphabetLetterPrefabs; // Array contendo os prefabs das letras do alfabeto
-    private Vector3 initialPosition;           // A posição inicial para clonagem
-    public float spacingX = 1.5f;             // Espaçamento entre as letras no eixo X
-    public float offsetBetweenLetters = 0.2f; // Deslocamento entre as letras no eixo X
+    public GameObject[] alphabetLetterPrefabs;  // Array contendo os prefabs das letras do alfabeto
+    private Vector3 initialPosition;            // A posição inicial para clonagem
+    public float spacingX = 1.5f;               // Espaçamento entre as letras no eixo X
+    public float offsetBetweenLetters = 0.2f;   // Deslocamento entre as letras no eixo X
+    public Transform parentTransform;           // Objeto pai onde os clones serão posicionados
+
 
     void Start()
     {
         initialPosition = transform.position;
-        CloneWordToPositions("TAA TOO"); // Insira a palavra que você deseja clonar aqui
+        CloneWordToPositions("JOÃO THIAGO");        // A palavra desejada deverá ser passada como parâmetro aqui.
     }
 
     void CloneWordToPositions(string word)
@@ -31,10 +33,13 @@ public class CloneAlphabetLetters : MonoBehaviour
                 // Se encontrar o prefab, clona o objeto da letra para a posição desejada
                 if (letterPrefab != null)
                 {
-                    GameObject clonedLetter = Instantiate(letterPrefab, currentPosition, Quaternion.identity);
+                    GameObject clonedLetter = Instantiate(letterPrefab, parentTransform);
                     Debug.Log("Instanciei a letra: " + letterChar);
                     // Atualiza a posição para a próxima letra, deslocada levemente à direita
+                    clonedLetter.transform.position = currentPosition;
                     currentPosition.x -= spacingX + offsetBetweenLetters;
+                    // clonedLetter.transform.localRotation = Quaternion.identity;
+                    
                 }
                 else
                 {

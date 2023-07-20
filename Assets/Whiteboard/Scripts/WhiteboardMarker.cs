@@ -43,15 +43,39 @@ public class WhiteboardMarker : MonoBehaviour
         _colors = Enumerable.Repeat(_renderer.material.color, _penSize * _penSize).ToArray();
         _tipHeight = _tip.localScale.y;
 
-        if (_pointsParent != null)
-        {
-            _sequencePoints = new List<Transform>(_pointsParent.GetComponentsInChildren<Transform>());
-            _sequencePoints.Remove(_pointsParent);
-        }
+        // if (_pointsParent != null)
+        // {
+        //     _sequencePoints = new List<Transform>(_pointsParent.GetComponentsInChildren<Transform>());
+        //     _sequencePoints.Remove(_pointsParent);
+        // }
+
+        StartCoroutine(StartWithDelay(1.0f));
 
         _initialPosition = _whiteboardObject.transform.position;
         Debug.Log("posicao inicial no start: " + _initialPosition);
 
+    }
+
+    IEnumerator StartWithDelay(float delayInSeconds)
+    {
+        yield return new WaitForSeconds(delayInSeconds);
+
+        GetPointsInChildren(_pointsParent);
+    }
+
+     void GetPointsInChildren(Transform parent)
+    {
+        // Percorre todos os filhos do objeto pai (letras)
+        foreach (Transform letter in parent)
+        {
+            // Percorre todos os filhos dos filhos do objeto pai (pontos)
+            foreach (Transform point in letter)
+            {
+                // Adiciona o ponto atual à lista de pontos
+                _sequencePoints.Add(point);
+                Debug.Log("Adicionei o ponto " + point);
+            }
+        }
         _sequencePoints[0].GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
     }
 
@@ -154,16 +178,19 @@ public class WhiteboardMarker : MonoBehaviour
         // Transform nextPoint = null;
         if (_currentPointIndex >= _sequencePoints.Count)
         {
-            _sequencePoints[_currentPointIndex-1].GetComponent<Renderer>().material.DisableKeyword("_EMISSION");
-            // Todos os pontos da sequência foram atravessados
-            Debug.Log("Sequencia completada em ordem!");
-            _currentPointIndex = 0;
-            _particlesSuccess.Play();
+            if (_sequencePoints.Count > 1)
+            {
+                    _sequencePoints[_currentPointIndex-1].GetComponent<Renderer>().material.DisableKeyword("_EMISSION");
+                // Todos os pontos da sequência foram atravessados
+                Debug.Log("Sequencia completada em ordem!");
+                _currentPointIndex = 0;
+                _particlesSuccess.Play();
 
-            // Mover o quadro para a esquerda suavemente
-            _targetPosition = _whiteboardObject.transform.position + Vector3.up * 0.25f; // "deslocamento" é o valor da distância que você deseja mover o quadro
-            _initialPosition = _whiteboardObject.transform.position;
-            StartCoroutine(ResetMoveTimerCoroutine());
+                // Mover o quadro para a esquerda suavemente
+                _targetPosition = _whiteboardObject.transform.position + Vector3.up * 0.25f; // "deslocamento" é o valor da distância que você deseja mover o quadro
+                _initialPosition = _whiteboardObject.transform.position;
+                StartCoroutine(ResetMoveTimerCoroutine());
+            }
             return;
         }
 
