@@ -198,11 +198,11 @@ MonoBehaviour:
   _tip: {fileID: 192679874}
   _penSize: 10
   _interpolationLevel: 0.1
-  _pointsTreshold: 0.1
   _pointsParent: {fileID: 875736111}
-  _particlesSuccess: {fileID: 1718047040}
+  _pointsTreshold: 0.15
   _moveDuration: 1
   _whiteboardObject: {fileID: 497593433}
+  _particlesSuccess: {fileID: 1718047040}
 --- !u!4 &26424057
 Transform:
   m_ObjectHideFlags: 0
@@ -463,15 +463,15 @@ GameObject:
   - component: {fileID: 116504179}
   - component: {fileID: 116504178}
   - component: {fileID: 116504177}
-  - component: {fileID: 116504176}
   - component: {fileID: 116504175}
+  - component: {fileID: 116504180}
   m_Layer: 0
   m_Name: Whiteboard
   m_TagString: Whiteboard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &116504174
 Transform:
   m_ObjectHideFlags: 0
@@ -503,20 +503,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &116504176
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 116504173}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1821857cd74296d499963f9ee7647a01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  texture: {fileID: 0}
-  textureSize: {x: 2048, y: 6144}
 --- !u!64 &116504177
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -581,6 +567,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 116504173}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &116504180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116504173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1821857cd74296d499963f9ee7647a01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texture: {fileID: 0}
+  textureSize: {x: 256, y: 256}
 --- !u!1 &124464966
 GameObject:
   m_ObjectHideFlags: 0

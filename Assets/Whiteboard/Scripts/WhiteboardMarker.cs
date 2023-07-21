@@ -6,14 +6,24 @@ using System;
 
 public class WhiteboardMarker : MonoBehaviour
 {
+    [Header("Pen Settings")]
     [SerializeField] private Transform _tip;
-    [SerializeField] private int _penSize = 5;
+    [Range(1, 50)]
+    [SerializeField] private int _penSize = 10;
+    [Range(0.001f, 0.5f)]
     [SerializeField] private float _interpolationLevel = 0.1f;
-    [SerializeField] private float _pointsTreshold = 5f;
+
+    [Header("Points Settings")]
     [SerializeField] private Transform _pointsParent;
-    [SerializeField] private ParticleSystem _particlesSuccess;
+    [Range(0.05f, 0.5f)]
+    [SerializeField] private float _pointsTreshold = 0.15f;
+
+    [Header("Whiteboard Settings")]
     [SerializeField] private float _moveDuration = 1f; // Duração da transição em segundos
     [SerializeField] private GameObject _whiteboardObject;
+
+    [Header("Success Settings")]
+    [SerializeField] private ParticleSystem _particlesSuccess;
 
     private Vector3 _initialPosition; // Posição inicial do quadro
     private Vector3 _targetPosition; // Posição final do quadro
