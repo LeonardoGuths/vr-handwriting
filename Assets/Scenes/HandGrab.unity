@@ -19341,18 +19341,22 @@ MonoBehaviour:
   - {fileID: 8161865903484542315, guid: 45e7cd5966dc96140856035d46be459f, type: 3}
   - {fileID: 1129081758535532472, guid: 066e8842d6e34fa42b832468a0ad31c5, type: 3}
   - {fileID: 6866536725613774818, guid: ece5b353fba485e45b9460be068fe1bd, type: 3}
-  - {fileID: 4307673737721041558, guid: 2f047155bb7a7f64183031d3e853a1c3, type: 3}
   - {fileID: 7972201418864875929, guid: 77768fbd8f6d2cd41a275ff0fd5bd2d4, type: 3}
   - {fileID: 2278808855423496151, guid: aa53759c4ffd00a42a92752d6872746a, type: 3}
+  - {fileID: 4307673737721041558, guid: 2f047155bb7a7f64183031d3e853a1c3, type: 3}
   - {fileID: 7344714911805848928, guid: 3298f1deab2ff79438b0c37fc31165df, type: 3}
   - {fileID: 2282694051923893307, guid: 029792f95ec21674c8b5972df82178c1, type: 3}
   - {fileID: 1964230480498032202, guid: 4a77d075c6c8c35488d2c6cfb0d14b37, type: 3}
   - {fileID: 3261944823312918972, guid: f978b8eeda614f74ab6924e13db6b3e6, type: 3}
   - {fileID: 1623104101702441834, guid: 71fa00078fb52c44893c1099d6a70083, type: 3}
+  - {fileID: 4389691755866658491, guid: 070c5e6f6d4d3fb4ab938bce68b5cb9b, type: 3}
+  - {fileID: 739389094873800655, guid: e3d5419f17c8ca8498d7d558197dc95c, type: 3}
+  - {fileID: 8526878287530918498, guid: 96d9bacc447b0714684f9be58c8b8693, type: 3}
+  - {fileID: 6020177717041588856, guid: df044e6b477108440bd50ed52d889272, type: 3}
   spacingX: 0.175
   offsetBetweenLetters: 0
   parentTransform: {fileID: 875736111}
-  palavra: abcde
+  palavra: LeONaRdO
 --- !u!114 &939706086
 MonoBehaviour:
   m_ObjectHideFlags: 0
