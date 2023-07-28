@@ -12220,7 +12220,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 397408665}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.7801, y: 2.1972, z: 2.1513}
+  m_LocalPosition: {x: -4.7766, y: 2.1972, z: 2.1513}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -19460,16 +19460,19 @@ MonoBehaviour:
   - {fileID: 3393985957918051822, guid: 4a77d075c6c8c35488d2c6cfb0d14b37, type: 3}
   - {fileID: 41145341543986487, guid: f978b8eeda614f74ab6924e13db6b3e6, type: 3}
   - {fileID: 1623104101702441834, guid: 71fa00078fb52c44893c1099d6a70083, type: 3}
-  - {fileID: 4389691755866658491, guid: 070c5e6f6d4d3fb4ab938bce68b5cb9b, type: 3}
-  - {fileID: 739389094873800655, guid: e3d5419f17c8ca8498d7d558197dc95c, type: 3}
-  - {fileID: 8526878287530918498, guid: 96d9bacc447b0714684f9be58c8b8693, type: 3}
-  - {fileID: 6020177717041588856, guid: df044e6b477108440bd50ed52d889272, type: 3}
-  - {fileID: 3351560285900049641, guid: a46bbcd5b9cf4d74ca4063bcc14a1031, type: 3}
-  - {fileID: 7311013464548358849, guid: 3fb79f916a328284e84d3fb1bbdf2698, type: 3}
+  - {fileID: 5445801029715689208, guid: 070c5e6f6d4d3fb4ab938bce68b5cb9b, type: 3}
+  - {fileID: 8306465585602814593, guid: e3d5419f17c8ca8498d7d558197dc95c, type: 3}
+  - {fileID: 4864340499504829780, guid: 96d9bacc447b0714684f9be58c8b8693, type: 3}
+  - {fileID: 1771213608593653936, guid: df044e6b477108440bd50ed52d889272, type: 3}
+  - {fileID: 973139062467472450, guid: a46bbcd5b9cf4d74ca4063bcc14a1031, type: 3}
+  - {fileID: 6186520738010797382, guid: 3fb79f916a328284e84d3fb1bbdf2698, type: 3}
+  - {fileID: 1683490387742157122, guid: c2780fed2e9402b4c9667247f87acb10, type: 3}
+  - {fileID: 5802540044714578086, guid: 80d328d5ca8aa33449c8f3db661def97, type: 3}
+  - {fileID: 3862917988333322740, guid: 922e7b04aa41583419bd3871825a6ce0, type: 3}
   spacingX: 0.175
   offsetBetweenLetters: 0
   parentTransform: {fileID: 875736111}
-  palavra: abcd
+  palavra: GIRAFA girafa
 --- !u!114 &939706086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19512,7 +19515,7 @@ Transform:
   m_GameObject: {fileID: 951195610}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.001, y: 0.001, z: 0.001}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 397408667}
@@ -19551,7 +19554,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 9db47f0ec6ae37141a0a9cc314bfbd3a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
