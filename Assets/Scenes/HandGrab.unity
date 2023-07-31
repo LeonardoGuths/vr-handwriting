@@ -19476,10 +19476,15 @@ MonoBehaviour:
   - {fileID: 4757040173068361697, guid: c334155b5b5b30e498cbb5e9f04ad6a9, type: 3}
   - {fileID: 1101752741492325067, guid: 4f5ceea5e1b082c499cfa6569c98e7dc, type: 3}
   - {fileID: 8460504512154656661, guid: f4f8ce5529d4d6d4f82904f52af7ab00, type: 3}
+  - {fileID: 493337428516384694, guid: deed0e1fa3a410c488812b7da9e06f52, type: 3}
+  - {fileID: 8844026844088983860, guid: ef6b12347d47da747b2c8db37298a5e4, type: 3}
+  - {fileID: 4513131211010449548, guid: cb8282a69f111c04aa32c3c1da514592, type: 3}
+  - {fileID: 3551033124206813100, guid: 16e6c4f943d43e443b79856d7d0059f1, type: 3}
+  - {fileID: 5057755476532005947, guid: 968efb218ece3dd4aaca4fc16e556569, type: 3}
   spacingX: 0.175
   offsetBetweenLetters: 0
   parentTransform: {fileID: 875736111}
-  palavra: jklmnopqrstu
+  palavra: caligrafia
 --- !u!114 &939706086
 MonoBehaviour:
   m_ObjectHideFlags: 0
