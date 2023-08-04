@@ -26,6 +26,7 @@ public class WhiteboardMarker : MonoBehaviour
     [SerializeField] private ParticleSystem _particlesSuccess1;
     [SerializeField] private ParticleSystem _particlesSuccess2;
     [SerializeField] private ParticleSystem _particlesSuccess3;
+    [SerializeField] private ParticleSystem _particlesSuccess4;
 
 
     [Header("MoveOVRCameraRig Settings")]
@@ -195,6 +196,7 @@ public class WhiteboardMarker : MonoBehaviour
         _particlesSuccess1.Play();
         _particlesSuccess2.Play();
         _particlesSuccess3.Play();
+        _particlesSuccess4.Play();
     }
 
     private void CheckPointCollision()

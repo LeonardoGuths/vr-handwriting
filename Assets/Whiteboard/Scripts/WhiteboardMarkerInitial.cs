@@ -22,12 +22,15 @@ public class WhiteboardMarkerInitial : MonoBehaviour
     //[Header("Button Move Settings")]
     [SerializeField] private float _moveDuration = 1f; // Duração da transição em segundos
     [SerializeField] private GameObject _buttonObject;
+    [SerializeField] private GameObject _trophyObject;
 
     [Header("Success Settings")]
     [SerializeField] private ParticleSystem _particlesSuccess;
 
-    private Vector3 _initialPosition; // Posição inicial do quadro
-    private Vector3 _targetPosition; // Posição final do quadro
+    private Vector3 _initialPositionB; 
+    private Vector3 _initialPositionT; 
+    private Vector3 _targetPositionB; // Posição final do quadro
+    private Vector3 _targetPositionT; // Posição final do quadro
     private float _moveTimer = 10f; // Cronômetro para controlar o tempo da transição
 
     private Renderer _renderer;
@@ -63,7 +66,9 @@ public class WhiteboardMarkerInitial : MonoBehaviour
 
         StartCoroutine(StartWithDelay(1.0f));
 
-        _initialPosition = _buttonObject.transform.position;
+        _initialPositionB = _buttonObject.transform.position;
+        _initialPositionT = _trophyObject.transform.position;
+
         //Debug.Log("posicao inicial no start: " + _initialPosition);
 
     }
@@ -119,7 +124,8 @@ public class WhiteboardMarkerInitial : MonoBehaviour
 
             // Calcular a interpolação linear entre a posição inicial e final
             float t = Mathf.Clamp01(_moveTimer / _moveDuration);
-            _buttonObject.transform.position = Vector3.Lerp(_initialPosition, _targetPosition, t);
+            _buttonObject.transform.position = Vector3.Lerp(_initialPositionB, _targetPositionB, t);
+            _trophyObject.transform.position = Vector3.Lerp(_initialPositionT, _targetPositionT, t);
         }
     }
 
@@ -198,11 +204,12 @@ public class WhiteboardMarkerInitial : MonoBehaviour
                 _currentPointIndex = 0;
                 _particlesSuccess.Play();
 
-
-
                 //Mover o quadro para a esquerda suavemente
-                _targetPosition = new Vector3(-3.6984000205993654f, 1.1627998352050782f, 6.686999797821045f);
-                _initialPosition = _buttonObject.transform.position;
+                _targetPositionB = new Vector3(-3.6984000205993654f, 1.1627998352050782f, 6.686999797821045f);
+                _targetPositionT = new Vector3(-3.839099884033203f, 1.3017001152038575f, 6.5096001625061039f);
+                _initialPositionB = _buttonObject.transform.position;
+                _initialPositionT = _trophyObject.transform.position;
+
                 StartCoroutine(ResetMoveTimerCoroutine());
             }
             return;
