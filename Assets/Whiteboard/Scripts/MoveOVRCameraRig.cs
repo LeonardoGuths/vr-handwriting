@@ -28,7 +28,7 @@ public class MoveOVRCameraRig : MonoBehaviour
             new Vector3(transform.position.x, transform.position.y + 0.44f, transform.position.z - 4f)
         };
 
-        StartCoroutine(WaitAndStartMovement(3f));
+        //StartCoroutine(WaitAndStartMovement(3f));
     }
 
     void Update()
