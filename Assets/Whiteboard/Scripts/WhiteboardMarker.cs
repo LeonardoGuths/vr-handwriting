@@ -23,7 +23,12 @@ public class WhiteboardMarker : MonoBehaviour
     [SerializeField] private GameObject _whiteboardObject;
 
     [Header("Success Settings")]
-    [SerializeField] private ParticleSystem _particlesSuccess;
+    [SerializeField] private ParticleSystem _particlesSuccess1;
+    [SerializeField] private ParticleSystem _particlesSuccess2;
+
+
+    [Header("MoveOVRCameraRig Settings")]
+    [SerializeField] private MoveOVRCameraRig _moveCameraScript;
 
     private Vector3 _initialPosition; // Posição inicial do quadro
     private Vector3 _targetPosition; // Posição final do quadro
@@ -183,6 +188,13 @@ public class WhiteboardMarker : MonoBehaviour
         _moveTimer = 0f;
     }
 
+    IEnumerator StartSuccessWithDelay()
+    {
+        yield return new WaitForSeconds(3f);
+        _particlesSuccess1.Play();
+        _particlesSuccess2.Play();
+    }
+
     private void CheckPointCollision()
     {
         // Transform currentPoint = _sequencePoints[_currentPointIndex];
@@ -191,16 +203,19 @@ public class WhiteboardMarker : MonoBehaviour
         {
             if (_sequencePoints.Count > 1)
             {
-                    _sequencePoints[_currentPointIndex-1].GetComponent<Renderer>().material.DisableKeyword("_EMISSION");
+                 _sequencePoints[_currentPointIndex-1].GetComponent<Renderer>().material.DisableKeyword("_EMISSION");
                 // Todos os pontos da sequência foram atravessados
                 Debug.Log("Sequencia completada em ordem!");
                 _currentPointIndex = 0;
-                _particlesSuccess.Play();
+                
+                _moveCameraScript.StartMovement2();
 
-                // Mover o quadro para a esquerda suavemente
-                _targetPosition = _whiteboardObject.transform.position + Vector3.up * 0.25f; // "deslocamento" é o valor da distância que você deseja mover o quadro
-                _initialPosition = _whiteboardObject.transform.position;
-                StartCoroutine(ResetMoveTimerCoroutine());
+                StartCoroutine(StartSuccessWithDelay());
+
+                //// Mover o quadro para cima suavemente
+                //_targetPosition = _whiteboardObject.transform.position + Vector3.up * 0.25f;
+                //_initialPosition = _whiteboardObject.transform.position;
+                //StartCoroutine(ResetMoveTimerCoroutine());
             }
             return;
         }

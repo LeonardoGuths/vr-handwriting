@@ -10,6 +10,9 @@ public class SwitchObjects : MonoBehaviour
     [SerializeField]
     private GameObject objectToActivate; // Objeto a ser ativado
 
+    [SerializeField]
+    private float delayTime;
+
     public void ActivateAndSwitchObjects()
     {
         StartCoroutine(SwitchObjectsWithDelay());
@@ -18,7 +21,7 @@ public class SwitchObjects : MonoBehaviour
     private System.Collections.IEnumerator SwitchObjectsWithDelay()
     {
         // Aguardar 3 segundos
-        yield return new WaitForSeconds(3.0f);
+        yield return new WaitForSeconds(delayTime);
 
         // Desativar o objeto de desativação
         objectToDeactivate.SetActive(false);

@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//POSITION WHEN FINISH LEVEL 2 UnityEditor.TransformWorldPlacementJSON:{ "position":{ "x":-3.899909257888794,"y":0.7179999947547913,"z":5.1539998054504398},"rotation":{ "x":0.0,"y":1.0,"z":0.0,"w":0.0},"scale":{ "x":1.25,"y":1.25,"z":1.25} }
+
 public class MoveOVRCameraRig : MonoBehaviour
 {
     public float movementSpeed = 1f; // A velocidade de movimento do OVRCameraRig
 
-    private bool isMoving = false; // Verifica se o OVRCameraRig está se movendo
-    private Vector3[] movementSequence; // Array para armazenar as posições do movimento sequencial
+    private bool isMoving1 = false;
+    private bool isMoving2 = false;
+    private Vector3[] movementSequence1; // Array para armazenar as posições do movimento sequencial 1
+    private Vector3[] movementSequence2; // Array para armazenar as posições do movimento sequencial 2
     private int currentMovementIndex = 0; // Índice atual do movimento sequencial
 
     //private bool waitForSecondsFinished = false; // Verifica se o tempo de espera de 3 segundos foi concluído
@@ -20,7 +24,7 @@ public class MoveOVRCameraRig : MonoBehaviour
     void Start()
     {
         // Define o movimento sequencial
-        movementSequence = new Vector3[]
+        movementSequence1 = new Vector3[]
         {
             new Vector3(transform.position.x, transform.position.y + 0.44f, transform.position.z),
             new Vector3(transform.position.x + 1f, transform.position.y + 0.44f , transform.position.z),
@@ -28,18 +32,23 @@ public class MoveOVRCameraRig : MonoBehaviour
             new Vector3(transform.position.x, transform.position.y + 0.44f, transform.position.z - 4f)
         };
 
+        movementSequence2 = new Vector3[]
+        {
+            new Vector3(-3.899909257888794f, 0.7179999947547913f, 5.1539998054504398f)
+        };
+
         //StartCoroutine(WaitAndStartMovement(3f));
     }
 
     void Update()
     {
-        if (isMoving)
+        if (isMoving1)
         {
             // Verifica se o OVRCameraRig chegou ao destino
-            if (Vector3.Distance(transform.position, movementSequence[currentMovementIndex]) <= 0.1f)
+            if (Vector3.Distance(transform.position, movementSequence1[currentMovementIndex]) <= 0.1f)
             {
                 // Verifica se há mais movimentos no sequencial
-                if (currentMovementIndex < movementSequence.Length - 1)
+                if (currentMovementIndex < movementSequence1.Length - 1)
                 {
                     // Atualiza o índice do movimento sequencial
                     currentMovementIndex++;
@@ -47,13 +56,40 @@ public class MoveOVRCameraRig : MonoBehaviour
                 else
                 {
                     // Para o movimento
-                    isMoving = false;
+                    isMoving1 = false;
                 }
             }
             else
             {
                 // Calcula a direção e a distância até o destino
-                Vector3 direction = (movementSequence[currentMovementIndex] - transform.position).normalized;
+                Vector3 direction = (movementSequence1[currentMovementIndex] - transform.position).normalized;
+
+                // Move o OVRCameraRig em direção ao destino com uma velocidade específica
+                transform.position += direction * movementSpeed * Time.deltaTime;
+            }
+        }
+
+        if (isMoving2)
+        {
+            // Verifica se o OVRCameraRig chegou ao destino
+            if (Vector3.Distance(transform.position, movementSequence2[currentMovementIndex]) <= 0.1f)
+            {
+                // Verifica se há mais movimentos no sequencial
+                if (currentMovementIndex < movementSequence2.Length - 1)
+                {
+                    // Atualiza o índice do movimento sequencial
+                    currentMovementIndex++;
+                }
+                else
+                {
+                    // Para o movimento
+                    isMoving2 = false;
+                }
+            }
+            else
+            {
+                // Calcula a direção e a distância até o destino
+                Vector3 direction = (movementSequence2[currentMovementIndex] - transform.position).normalized;
 
                 // Move o OVRCameraRig em direção ao destino com uma velocidade específica
                 transform.position += direction * movementSpeed * Time.deltaTime;
@@ -83,17 +119,24 @@ public class MoveOVRCameraRig : MonoBehaviour
         directionalLight.intensity = intensidadeFinal;
     }
 
-    IEnumerator WaitAndStartMovement(float waitTime)
-    {
-        yield return new WaitForSeconds(waitTime);
-        StartMovement();
-    }
+    //IEnumerator WaitAndStartMovement(float waitTime)
+    //{
+    //    yield return new WaitForSeconds(waitTime);
+    //    StartMovement();
+    //}
 
-    public void StartMovement()
+    public void StartMovement1()
     {
         // Inicia o movimento
-        isMoving = true;
+        isMoving1 = true;
         currentMovementIndex = 0;
         StartCoroutine(DiminuirIntensidadeEmissaoCoroutine());
+    }
+
+    public void StartMovement2()
+    {
+        // Inicia o movimento
+        isMoving2 = true;
+        currentMovementIndex = 0;
     }
 }
