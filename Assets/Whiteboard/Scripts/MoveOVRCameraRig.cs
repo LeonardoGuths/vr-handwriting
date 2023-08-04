@@ -10,7 +10,7 @@ public class MoveOVRCameraRig : MonoBehaviour
     private Vector3[] movementSequence; // Array para armazenar as posições do movimento sequencial
     private int currentMovementIndex = 0; // Índice atual do movimento sequencial
 
-    private bool waitForSecondsFinished = false; // Verifica se o tempo de espera de 3 segundos foi concluído
+    //private bool waitForSecondsFinished = false; // Verifica se o tempo de espera de 3 segundos foi concluído
 
     public Light directionalLight; // Referência à Directional Light
     public float duracaoTransicao = 3f; // Duração da transição em segundos
