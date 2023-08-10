@@ -4,6 +4,8 @@ using UnityEngine;
 using System.Linq;
 using System;
 
+[RequireComponent(typeof(AudioSource))]
+
 public class WhiteboardMarker : MonoBehaviour
 {
     [Header("Pen Settings")]
@@ -27,6 +29,8 @@ public class WhiteboardMarker : MonoBehaviour
     [SerializeField] private ParticleSystem _particlesSuccess2;
     [SerializeField] private ParticleSystem _particlesSuccess3;
     [SerializeField] private ParticleSystem _particlesSuccess4;
+    AudioSource audioData;
+
 
 
     [Header("MoveOVRCameraRig Settings")]
@@ -72,6 +76,7 @@ public class WhiteboardMarker : MonoBehaviour
         _initialPosition = _whiteboardObject.transform.position;
         Debug.Log("posicao inicial no start: " + _initialPosition);
 
+        audioData = GetComponent<AudioSource>();
     }
 
     IEnumerator StartWithDelay(float delayInSeconds)
@@ -211,6 +216,8 @@ public class WhiteboardMarker : MonoBehaviour
                 // Todos os pontos da sequência foram atravessados
                 Debug.Log("Sequencia completada em ordem!");
                 _currentPointIndex = 0;
+
+                audioData.Play(0);
                 
                 _moveCameraScript.StartMovement2();
 

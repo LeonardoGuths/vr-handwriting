@@ -4,6 +4,8 @@ using UnityEngine;
 using System.Linq;
 using System;
 
+[RequireComponent(typeof(AudioSource))]
+
 public class WhiteboardMarkerInitial : MonoBehaviour
 {
     [Header("Pen Settings")]
@@ -26,6 +28,10 @@ public class WhiteboardMarkerInitial : MonoBehaviour
 
     [Header("Success Settings")]
     [SerializeField] private ParticleSystem _particlesSuccess;
+    AudioSource audioData;
+
+
+
 
     private Vector3 _initialPositionB; 
     private Vector3 _initialPositionT; 
@@ -70,6 +76,7 @@ public class WhiteboardMarkerInitial : MonoBehaviour
         _initialPositionT = _trophyObject.transform.position;
 
         //Debug.Log("posicao inicial no start: " + _initialPosition);
+        audioData = GetComponent<AudioSource>();
 
     }
 
@@ -202,7 +209,9 @@ public class WhiteboardMarkerInitial : MonoBehaviour
                 // Todos os pontos da sequência foram atravessados
                 Debug.Log("Sequencia completada em ordem!");
                 _currentPointIndex = 0;
+
                 _particlesSuccess.Play();
+                audioData.Play(0);
 
                 //Mover o quadro para a esquerda suavemente
                 _targetPositionB = new Vector3(-3.6984000205993654f, 1.1627998352050782f, 6.686999797821045f);

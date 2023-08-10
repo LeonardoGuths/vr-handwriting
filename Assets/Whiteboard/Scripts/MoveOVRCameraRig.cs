@@ -5,6 +5,7 @@ using UnityEngine;
 //POSITION WHEN FINISH LEVEL 2 UnityEditor.TransformWorldPlacementJSON:{ "position":{ "x":-3.899909257888794,"y":0.7179999947547913,"z":5.1539998054504398},"rotation":{ "x":0.0,"y":1.0,"z":0.0,"w":0.0},"scale":{ "x":1.25,"y":1.25,"z":1.25} }
 //POSITION WHEN LEVEL 3 UnityEditor.TransformWorldPlacementJSON:{"position":{"x":-8.66100025177002,"y":0.7169440388679504,"z":2.750999927520752},"rotation":{"x":0.0,"y":1.0,"z":0.0,"w":0.0},"scale":{"x":1.25,"y":1.25,"z":1.25}}
 //POSITION TO GO TO LEVEL 4 UnityEditor.TransformWorldPlacementJSON:{"position":{"x":-3.8141133785247804,"y":0.7524818181991577,"z":2.9477956295013429},"rotation":{"x":0.0,"y":1.0,"z":0.0,"w":0.0},"scale":{"x":1.25,"y":1.25,"z":1.25}}
+// UnityEditor.TransformWorldPlacementJSON:{"position":{"x":-3.8072659969329836,"y":0.7523511052131653,"z":2.866680145263672},"rotation":{"x":0.0,"y":1.0,"z":0.0,"w":0.0},"scale":{"x":1.25,"y":1.25,"z":1.25}}
 public class MoveOVRCameraRig : MonoBehaviour
 {
     public float movementSpeed = 1f; // A velocidade de movimento do OVRCameraRig
@@ -49,9 +50,10 @@ public class MoveOVRCameraRig : MonoBehaviour
             new Vector3(-8.66100025177002f, 0.7169440388679504f, 2.750999927520752f)
         };
 
+        // movement4 = vai pro quadro
         movementSequence4 = new Vector3[]
         {
-            new Vector3(-3.8141133785247804f, 0.7524818181991577f, 2.9477956295013429f)
+            new Vector3(-3.8141133785247804f, 0.7524818181991577f, 2.86666295013429f)
         };
         //StartCoroutine(WaitAndStartMovement(3f));
     }
