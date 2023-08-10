@@ -33,8 +33,8 @@ public class MoveOVRCameraRig : MonoBehaviour
         {
             new Vector3(transform.position.x, transform.position.y + 0.44f, transform.position.z),
             new Vector3(transform.position.x + 1f, transform.position.y + 0.44f , transform.position.z),
-            new Vector3(transform.position.x + 1f, transform.position.y + 0.5f, transform.position.z - 4.1f),
-            new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z - 4.1f)
+            new Vector3(transform.position.x + 1f, transform.position.y + 0.5f, transform.position.z - 4.0f),
+            new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z - 4.2f)
         };
 
         // movement2 = vai pro painel de nextlevel no meio da sala
