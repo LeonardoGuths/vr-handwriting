@@ -36,6 +36,9 @@ public class WhiteboardMarker : MonoBehaviour
     [Header("MoveOVRCameraRig Settings")]
     [SerializeField] private MoveOVRCameraRig _moveCameraScript;
 
+    [Header("Screenshot Capture Settings")]
+    [SerializeField] private CameraCapture _captureCamera;
+
     private Vector3 _initialPosition; // Posição inicial do quadro
     private Vector3 _targetPosition; // Posição final do quadro
     private float _moveTimer = 10f; // Cronômetro para controlar o tempo da transição
@@ -59,6 +62,8 @@ public class WhiteboardMarker : MonoBehaviour
         Color.yellow
     };
 
+    private bool shotFinished = false;
+
     private void Start()
     {
         _renderer = _tip.GetComponent<Renderer>();
@@ -71,17 +76,22 @@ public class WhiteboardMarker : MonoBehaviour
         //     _sequencePoints.Remove(_pointsParent);
         // }
 
-        StartCoroutine(StartWithDelay(1.0f));
+        
+        Debug.Log("starto a corotina");
+        StartCoroutine(StartWithDelay(3.0f));
 
         _initialPosition = _whiteboardObject.transform.position;
         Debug.Log("posicao inicial no start: " + _initialPosition);
 
         audioData = GetComponent<AudioSource>();
+        
     }
 
     IEnumerator StartWithDelay(float delayInSeconds)
     {
+        Debug.Log("vou esperar o delay");
         yield return new WaitForSeconds(delayInSeconds);
+        Debug.Log("passei o delay");
 
         GetPointsInChildren(_pointsParent);
     }
@@ -99,8 +109,10 @@ public class WhiteboardMarker : MonoBehaviour
                 Debug.Log("Adicionei o ponto " + point);
             }
         }
+        _captureCamera.CaptureScreenshot();
         _sequencePoints[0].GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
     }
+
 
     private void Update()
     {
@@ -220,6 +232,8 @@ public class WhiteboardMarker : MonoBehaviour
                 audioData.Play(0);
                 
                 _moveCameraScript.StartMovement2();
+
+                _captureCamera.CaptureScreenshot();
 
                 StartCoroutine(StartSuccessWithDelay());
 
