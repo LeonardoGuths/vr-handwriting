@@ -17,9 +17,10 @@ public class CameraCapture : MonoBehaviour
     // optional game object to hide during screenshots (usually your scene canvas hud)
     public GameObject hideGameObject1; 
     public GameObject hideGameObject2; 
-    public GameObject hideGameObject3; 
-    
-  
+    public GameObject hideGameObject3;
+    public GameObject hideGameObject4;
+
+
     // optimize for many screenshots will not destroy any objects so future screenshots will be fast
     public bool optimizeForManyScreenshots = true;
   
@@ -94,10 +95,12 @@ public class CameraCapture : MonoBehaviour
                 hideGameObject1.SetActive(false);
                 hideGameObject2.SetActive(false);
                 hideGameObject3.SetActive(false);
+                hideGameObject4.SetActive(false);
+
             }
-  
+
             // create screenshot objects if needed
-			if (renderTexture == null)
+            if (renderTexture == null)
             {
                 // creates off-screen render texture that can rendered into
 				rect = new Rect(0, 0, captureWidth, captureHeight);
@@ -163,8 +166,10 @@ public class CameraCapture : MonoBehaviour
                 hideGameObject1.SetActive(true);
                 hideGameObject2.SetActive(true);
                 hideGameObject3.SetActive(true);
+                hideGameObject4.SetActive(true);
+
             }
-  
+
             // cleanup if needed
             if (optimizeForManyScreenshots == false)
             {
