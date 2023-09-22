@@ -209,11 +209,24 @@ public class WhiteboardMarker : MonoBehaviour
 
     IEnumerator StartSuccessWithDelay()
     {
-        yield return new WaitForSeconds(3f);
-        _particlesSuccess1.Play();
-        _particlesSuccess2.Play();
-        _particlesSuccess3.Play();
-        _particlesSuccess4.Play();
+        yield return new WaitForSeconds(2f);
+        if (_particlesSuccess1)
+            _particlesSuccess1.Play();
+        if (_particlesSuccess2)
+            _particlesSuccess2.Play();
+        if (_particlesSuccess3)
+            _particlesSuccess3.Play();
+        if (_particlesSuccess4)
+            _particlesSuccess4.Play();
+        //StartCoroutine(StartScreenshotWithDelay());
+        _captureCamera.CaptureScreenshot();
+
+    }
+
+    IEnumerator StartScreenshotWithDelay()
+    {
+        yield return new WaitForSeconds(0.2f);
+        _captureCamera.CaptureScreenshot();
     }
 
     private void CheckPointCollision()
@@ -233,7 +246,6 @@ public class WhiteboardMarker : MonoBehaviour
                 
                 _moveCameraScript.StartMovement2();
 
-                _captureCamera.CaptureScreenshot();
 
                 StartCoroutine(StartSuccessWithDelay());
 
